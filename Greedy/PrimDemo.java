@@ -12,7 +12,7 @@ class Pair{
     }
 }
 
-public class PrimsDemo {
+public class PrimDemo {
 
     public static int prim(int V, List<List<Pair>> graph){
         int totalWeight = 0; //intialize it to 0, this will keep minimum weight
