@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//USES DSU(disjoint set union to check if any two vertices containing an edge is making cycle or not, if they make cycle they will be in same set and hence we will not consider it )
+
 class Edge implements Comparable<Edge> {
     int u;
     int v;
@@ -23,13 +25,14 @@ public class KruskalDemo {
     static int find(int x){
         if(x == parent[x])
             return x;
-        return parent[x] = find(parent[x]);
+        return parent[x] = find(parent[x]); //using path compression
     }
 
     static void union(int u, int v){
-        int pU = find(u);
-        int pV = find(v);
+        int pU = find(u); //find parent of u
+        int pV = find(v); //find parent of v
 
+        //combine smaller set into larger
         if(rank[pU] < rank[pV]){
             parent[pU] = pV;
         }
@@ -38,7 +41,7 @@ public class KruskalDemo {
         }
         else{
             parent[pV] = pU;
-            rank[pU]++;
+            rank[pU]++; //if ranks are equal then increment rank of one of them accordingly
         }
     }
 
@@ -65,6 +68,8 @@ public class KruskalDemo {
 
         for(Edge e: edges){
             if(find(e.u) != find(e.v)){
+                //if parents are not the same that means u and v are in different set
+                //and hence we add weight of u-v to total cost, and perform union based on rank
                 union(e.u,e.v);
                 cost+=e.weight;
             }
