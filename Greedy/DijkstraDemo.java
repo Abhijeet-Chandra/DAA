@@ -14,22 +14,14 @@ class Pair{
 
 
 public class DijkstraDemo {
-    public static void main(String[] args) {
-        int V = 4;
+
+    public static void Dijkstra(List<List<Pair>> graph, int V, int start){
+
         int [] explored = new int[V];
         int [] dist = new int[V];
 
         Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[0] = 0;
-
-        List<List<Pair>> graph = new ArrayList<>();
-        for (int i = 0; i < V; i++) graph.add(new ArrayList<>());
-
-        graph.get(0).add(new Pair(1, 1));
-        graph.get(0).add(new Pair(2, 4));
-        graph.get(1).add(new Pair(2, 2));
-        graph.get(1).add(new Pair(3, 6));
-        graph.get(2).add(new Pair(3, 3));
+        dist[start] = 0;
 
         PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
 
@@ -56,5 +48,19 @@ public class DijkstraDemo {
         for (int i = 0; i < V; i++) {
             System.out.println(i + "\t" + dist[i]);
         }
+    }
+    public static void main(String[] args) {
+        int V = 4;
+
+        List<List<Pair>> graph = new ArrayList<>();
+        for (int i = 0; i < V; i++) graph.add(new ArrayList<>());
+
+        graph.get(0).add(new Pair(1, 1));
+        graph.get(0).add(new Pair(2, 4));
+        graph.get(1).add(new Pair(2, 2));
+        graph.get(1).add(new Pair(3, 6));
+        graph.get(2).add(new Pair(3, 3));
+        
+        Dijkstra(graph, V, 0);
     }
 }
