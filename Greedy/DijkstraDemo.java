@@ -25,7 +25,7 @@ public class DijkstraDemo {
 
         PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
 
-        pq.add(new Pair(0, 0));
+        pq.add(new Pair(start, 0));
 
         while(!pq.isEmpty()){
             Pair currVertex = pq.poll();
