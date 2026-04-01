@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//implementation without priority queue
+//space complexity: O(V+E)
+//time complexity: O(V²)
+
 class Pair{
     int vertex;
     int weight;
