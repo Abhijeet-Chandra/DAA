@@ -15,27 +15,32 @@ class Pair{
 
 public class HamiltonianCircuit {
     static int V = 5; //no of vertices
-    static boolean [] visited;
-    static int noOfCircuits;
+    static boolean [] visited; //to mark the vertices we have visited
+    static int noOfCircuits = 0; 
     public static void HamiltonianCircuits(List<List<Pair>> graph, int current, int start, int count){
-        visited[current] = true;
-        count++;
+        visited[current] = true; //mark the current vertex visited
+        count++; //increase the count, this count basically denotes the number of vertices we have encountered till now
         if(count == V){
             for(Pair neighbour : graph.get(current)){
-                if(neighbour.vertex == start){
-                    noOfCircuits++;
+                if(neighbour.vertex == start){  //if the last vertex we are on, has starting vertex adjacent to it that means cycle is there
+                    noOfCircuits++; //increase count of hamiltonian circuits
                     break;
                 }
             }
         }
         else{
+            //this is basic dfs algo
             for(Pair neighbour : graph.get(current)){
             if(!visited[neighbour.vertex]){
-                HamiltonianCircuits(graph, neighbour.vertex, start, count);
+                HamiltonianCircuits(graph, neighbour.vertex, start, count); 
                 }
             }
         }
+
+        //after visiting all neighbours of a node backtrack
         visited[current] = false;
+
+        //remmeber we dont do count-- because each recursive call has its own copy of count
     }
     public static void main(String[] args) {
         visited = new boolean[V];
@@ -68,6 +73,6 @@ public class HamiltonianCircuit {
 
         HamiltonianCircuits(graph, 0, 0, 0);
 
-        System.out.println("Number of Hamiltonian Circuits: " + (noOfCircuits/2));
+        System.out.println("Number of Hamiltonian Circuits: " + (noOfCircuits/2)); //divide by 2 to prevent duplicates
     }
 }
