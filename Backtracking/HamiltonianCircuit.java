@@ -20,7 +20,7 @@ public class HamiltonianCircuit {
     public static void HamiltonianCircuits(List<List<Pair>> graph, int current, int start, int count){
         visited[current] = true; //mark the current vertex visited
         count++; //increase the count, this count basically denotes the number of vertices we have encountered till now
-        if(count == V){
+        if(count == V){ //if all vertices visited, possibility of cycle is there, that we check inside this if block
             for(Pair neighbour : graph.get(current)){
                 if(neighbour.vertex == start){  //if the last vertex we are on, has starting vertex adjacent to it that means cycle is there
                     noOfCircuits++; //increase count of hamiltonian circuits
